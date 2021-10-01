@@ -5,10 +5,12 @@ import { Route, Switch } from "react-router-dom";
 // import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import SideBar from "./components/SideBar";
 import Home from "./components/Home";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -16,6 +18,9 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <Home />
+      <SideBar />
+
       {/* {isLoaded && (
         <Switch>
           <Route path="/login" >

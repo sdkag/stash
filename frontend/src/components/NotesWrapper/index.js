@@ -4,7 +4,7 @@ import Note from "./Note";
 import "./Note.css";
 
 export default function NotesContainer({ status }) {
-  const noteIds = useSelector((state) => state.notes[status]);
+  const noteIds = useSelector((state) => state.notes[status]) || [];
 
   return (
     <>
