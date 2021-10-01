@@ -1,32 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import { setTypeStatus } from "../../store/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLightbulb,
   faDownload as faArchive,
 } from "@fortawesome/free-solid-svg-icons";
-
-export default function SideBar() {
+import "./SideBar.css";
+export default function SideBar({ isSidebarOpen: isOpen }) {
   const dispatch = useDispatch();
+  // const [open, toggleOpen] = useState(false);
 
   const handleClick = ({ target: { id } }) => {
     if (["Notes", "Archive"].includes(id)) dispatch(setTypeStatus(id));
   };
   return (
     <>
-      <div onClick={handleClick} className="sidebar">
+      <h1>Sidebar</h1>
+      <div
+        onClick={handleClick}
+        className={`${isOpen ? "sidebar sidebar-open" : "sidebar"}`}
+      >
         <ul className="sidebar-links">
           <li id="Notes">
             <div className="sidebar_link">
               <FontAwesomeIcon icon={faLightbulb} />
-              <div to="/">Notes</div>
+              {isOpen && <div to="/">Notes</div>}
             </div>
           </li>
           <li id="Archive">
             <div className="sidebar_link">
               <FontAwesomeIcon icon={faArchive} />
-              <div to="/">Archive</div>
+              {isOpen && <div to="/">Archive</div>}
             </div>
           </li>
         </ul>

@@ -7,18 +7,12 @@ export const setTypeStatus = (status) => ({
 
 const notes = "Notes";
 const archive = "Archive";
-
-const initialState = {
-  status: "",
-  options: { notes, archive },
-};
+const OPTIONS = { notes, archive };
+const initialState = [null, OPTIONS];
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_TYPE_STATUS:
-      return {
-        ...state,
-        status: state.options[action.payload],
-      };
+      return [OPTIONS[action.payload] || null, OPTIONS];
     default:
       return { ...state };
   }
