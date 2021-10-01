@@ -20,13 +20,19 @@ const initialState = {
   byId: {
     1: {
       title: "The Beginning",
-      body: "The beginning of the story",
+      content: "The beginning of the story",
+      status: "notes",
     },
     2: {
       title: "The Middle",
+      content:
+        "The middle of the story, this is were the story can get real interesting",
+      status: "pinned",
     },
     3: {
       title: "The End",
+      content: "The end of the story",
+      status: "archived",
     },
   },
   allIds: [1, 2, 3],

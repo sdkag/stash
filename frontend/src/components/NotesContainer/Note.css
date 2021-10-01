@@ -1,4 +1,4 @@
-.note {
+.notes-note {
 	width: 240px;
 	border-radius: 8px;
 	box-sizing: border-box;
@@ -8,7 +8,6 @@
 	background-color: red;
 	color: #3c4043;
 	display: inline-block;
-	/* font: 500 14px/16px Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif; */
 	letter-spacing: 0.25px;
 	margin: 16px 0 0;
 	max-width: 254px;
@@ -20,10 +19,23 @@
 	overflow: hidden
 }
 
-.title {
+.notes-title {
 	height: 26px;
 	width: 215px;
+	border: 1 px solid red;
+}
 
+.notes-content {
+	border: 1 px solid red;
+
+}
+
+.notes-iconRow {
+	border: 1 px solid red;
+}
+
+.notes-topBar {
+	border: 1 px solid red;
 }
 
 /*

@@ -1,10 +1,10 @@
 import React from "react";
-import Notes from "./NotesContainer/NotesContainer";
+import Notes from "./NotesContainer";
 export default function Home() {
   return (
     <>
       <h1>Home</h1>
-      <Notes />
+      <Notes status={"notes"} />
     </>
   );
 }
