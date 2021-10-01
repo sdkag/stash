@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { queryStore } from "../../store/notes";
 
 const debounce = (thunk, timeOut, dispatch) => {
+  //TODO: incorporate this properly
   let timer;
   debugger;
   return (...args) => {
