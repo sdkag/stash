@@ -36,9 +36,9 @@ const initialState = {
     },
   },
   allIds: [1, 2, 3],
-  archived: [3],
-  notes: [1, 2],
-  pinned: [2],
+  Archive: [3],
+  Notes: [1, 2],
+  Pinned: [2],
 };
 
 function reducer(state = initialState, action) {
