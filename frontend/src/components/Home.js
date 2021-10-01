@@ -1,10 +1,14 @@
 import React from "react";
-import Notes from "./NotesContainer";
+import NotesWrapper from "./NotesWrapper";
+import { useSelector, useState } from "react-redux";
+
 export default function Home() {
+  const slowerStatus = useSelector((state) => state.status.current); //?which is better this or status in NotesWrapper.js
+
   return (
     <>
       <h1>Home</h1>
-      <Notes status={"notes"} />
+      <NotesWrapper status={slowerStatus} />
     </>
   );
 }
