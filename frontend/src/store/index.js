@@ -4,8 +4,8 @@ import session from "./session";
 import notes from "./notes";
 
 const rootReducer = combineReducers({
-  notes,
   session,
+  notes,
 });
 
 let enhancer;

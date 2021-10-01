@@ -1,6 +1,15 @@
 import { fetch } from "./csrf.js";
 
-const FETCH_NOTES = fetch("/api/notes");
+const FETCH_NOTES = "FETCH_NOTES";
+
+export const getNotes = () => async (dispatch) => {
+  try {
+    const notes = await fetch("/api/notes");
+    dispatch(fetchNotes(notes));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const fetchNotes = (notes) => ({
   type: FETCH_NOTES,

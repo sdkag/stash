@@ -5,11 +5,12 @@
 	margin: 16px;
 	position: absolute;
 	border: 1px solid #dadce0;
+	/* border: 1px solid #dadce0; */
 
-	background-color: #ffffff;
+	background-color: red;
 	color: #3c4043;
 	display: inline-block;
-	font: 500 14px/16px Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+	/* font: 500 14px/16px Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif; */
 	letter-spacing: 0.25px;
 	margin: 16px 0 0;
 	max-width: 254px;
@@ -19,6 +20,12 @@
 	text-decoration: none;
 	text-overflow: ellipsis;
 	overflow: hidden
+}
+
+.title {
+	height: 26px;
+	width: 215px;
+
 }
 
 /*
