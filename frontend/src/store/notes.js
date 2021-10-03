@@ -71,7 +71,7 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_NOTES:
+    case FETCH_NOTES: //backend groupby, status order by created at
       return {
         byId: action.payload.reduce(
           (state, note) => ({
@@ -83,7 +83,6 @@ function reducer(state = initialState, action) {
         allIds: action.payload.map(({ id }) => id),
       };
     case SEARCH_NOTES:
-      let matches = [];
       let matchIds = [];
       const matchesMetaById = {};
       state.allIds.forEach((id) => {
