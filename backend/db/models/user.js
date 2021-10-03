@@ -51,8 +51,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = function (models) {
     // associations can be defined here
-    User.haveMany(models.Note, {
-      as: "Notes",
+    User.hasMany(models.Note, {
+      as: "MyNotes",
       foreignKey: "authorId",
     });
   };
@@ -79,11 +79,11 @@ module.exports = (sequelize, DataTypes) => {
           email: credential,
         },
       },
+      include: Note,
     });
+    console.log("\n\n\n\n\n", user);
     if (user && user.validatePassword(password)) {
-      return await User.scope("currentUser").findByPk(user.id, {
-        include: ["Notes"],
-      });
+      return await User.scope("currentUser").findByPk(user.id);
     }
   };
 
@@ -94,9 +94,7 @@ module.exports = (sequelize, DataTypes) => {
       email,
       hashedPassword,
     });
-    return await User.scope("currentUser").findByPk(user.id, {
-      include: ["Notes"],
-    });
+    return await User.scope("currentUser").findByPk(user.id);
   };
   return User;
 };

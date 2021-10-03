@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import ProfileButton from "./ProfileButton";
+import { useSelector, useDispatch } from "react-redux";
 // import LoginFormModal from '../LoginFormModal';
 import "./Navigation.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,11 +10,17 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "./SearchBar";
+import ProfileButton from "./ProfileButton";
+import { signup, login } from "../../store/session";
+
 function Navigation({ isLoaded, toggleSidebar }) {
+  const sessionUser = useSelector((state) => state.session.user);
+
   //       {/* <LoginFormModal /> */}
   //       <NavLink to="/signup">Sign Up</NavLink>
   //     </>
   // );
+
   // }
 
   return (
@@ -24,18 +29,23 @@ function Navigation({ isLoaded, toggleSidebar }) {
         <div onClick={() => toggleSidebar((prevState) => !prevState)}>
           <FontAwesomeIcon icon={faHamburger} />
         </div>
+      </li>
+      <li>
         <div>
           <FontAwesomeIcon icon={faLightbulb} />
           Keep
         </div>
+      </li>
+      <li>
         <div>
           <SearchBar>
             <FontAwesomeIcon icon={faSearch} />
           </SearchBar>
           Keep
         </div>
-        {isLoaded && <ProfileButton />}
       </li>
+
+      <li>{isLoaded && <ProfileButton user={sessionUser} />}</li>
     </ul>
   );
 }
