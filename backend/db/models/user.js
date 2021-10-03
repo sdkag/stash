@@ -51,6 +51,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = function (models) {
     // associations can be defined here
+    User.haveMany(models.Note, {
+      as: "Notes",
+      foreignKey: "authorId",
+    });
   };
   User.prototype.toSafeObject = function () {
     // remember, this cannot be an arrow function
@@ -77,7 +81,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     if (user && user.validatePassword(password)) {
-      return await User.scope("currentUser").findByPk(user.id);
+      return await User.scope("currentUser").findByPk(user.id, {
+        include: ["Notes"],
+      });
     }
   };
 
@@ -88,7 +94,9 @@ module.exports = (sequelize, DataTypes) => {
       email,
       hashedPassword,
     });
-    return await User.scope("currentUser").findByPk(user.id);
+    return await User.scope("currentUser").findByPk(user.id, {
+      include: ["Notes"],
+    });
   };
   return User;
 };
