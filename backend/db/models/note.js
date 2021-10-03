@@ -29,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
   });
   Note.associate = function (models) {
     // associa tions can be defined here
-    Note.belongsTo(models.User, { foreignKey: "authorId" });
+    Note.belongsTo(models.User, {
+      as: "Author",
+      foreignKey: "authorId",
+    });
   };
   return Note;
 };
