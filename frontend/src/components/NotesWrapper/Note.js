@@ -11,10 +11,6 @@ import {
 
 export default function Note({ noteId }) {
   const note = useSelector((state) => state.notes.byId[noteId]);
-  // const myStyles = { ...styles };
-
-  // console.log(myStyles);
-  // debugger;
 
   return note ? (
     <>

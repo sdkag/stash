@@ -5,17 +5,24 @@ import { Route, Switch } from "react-router-dom";
 // import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import SideBar from "./components/SideBar";
 import Home from "./components/Home";
 function App() {
   const dispatch = useDispatch();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} />
+      <Home />
+      <SideBar isSidebarOpen={isSidebarOpen} />
+
       {/* {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -26,7 +33,6 @@ function App() {
           </Route>
         </Switch>
       )} */}
-      <Home />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { fetch } from "./csrf.js";
 
 const FETCH_NOTES = "FETCH_NOTES";
-
+const SEARCH_NOTES = "SEARCH_NOTES";
 export const getNotes = () => async (dispatch) => {
   try {
     const notes = await fetch("/api/notes");
@@ -9,6 +9,32 @@ export const getNotes = () => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+const searchStore = (searchTerm, str) => {
+  const regexp = new RegExp(searchTerm, "gi");
+  str.matchAll(regexp);
+  const isEasier = Array.from(
+    str.matchAll(regexp),
+    (m) => `${regexp.lastIndex} ${m[0]}`
+  );
+  let array = [...str.matchAll(regexp)];
+
+  console.log("is this actually Easier", isEasier);
+  console.log("is this the array that is supposedly easier", array);
+  /*
+  [ matchedTerm, index, input]
+  */
+  return array;
+};
+
+const searchNotes = (searchTerm) => ({
+  type: SEARCH_NOTES,
+  payload: searchTerm,
+});
+export const queryStore = (searchTerm) => (dispatch) => {
+  if (!searchTerm) return;
+  dispatch(searchNotes(searchTerm));
 };
 
 const fetchNotes = (notes) => ({
@@ -36,14 +62,16 @@ const initialState = {
     },
   },
   allIds: [1, 2, 3],
-  archived: [3],
-  notes: [1, 2],
-  pinned: [2],
+  Archive: [3],
+  Notes: [1, 2],
+  Pinned: [2],
+  matchedSearch: [],
+  matchesMetaById: {},
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_NOTES:
+    case FETCH_NOTES: //backend groupby, status order by created at
       return {
         byId: action.payload.reduce(
           (state, note) => ({
@@ -54,8 +82,29 @@ function reducer(state = initialState, action) {
         ),
         allIds: action.payload.map(({ id }) => id),
       };
+    case SEARCH_NOTES:
+      let matchIds = [];
+      const matchesMetaById = {};
+      state.allIds.forEach((id) => {
+        // const content = searchStore(action.payload, state.byId[id].content);
+        const title = searchStore(action.payload, state.byId[id].title);
+        // if (content.length || title.length) {
+        if (title.length) {
+          // matches.push({ content, title });
+          matchIds.push(id);
+          // matchesMetaById[id] = { content, title };
+          matchesMetaById[id] = { title };
+        }
+      });
+      debugger;
+      return {
+        ...state,
+        matchedSearch: { ...matchIds }, //because... why you not workin'
+        matchesMetaById: { ...matchesMetaById }, //because... why you not workin'
+      };
+    // state.allIds.filer((id) => state.byId[id].title.includes(action.payload));
     default:
-      return state;
+      return { ...state };
   }
 }
 
