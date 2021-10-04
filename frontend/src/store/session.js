@@ -1,4 +1,5 @@
 import { fetch } from "./csrf.js";
+import { getNotes } from "./notes.js";
 
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
@@ -24,9 +25,13 @@ export const login =
   };
 
 export const restoreUser = () => async (dispatch) => {
-  const res = await fetch("/api/session");
-  dispatch(setUser(res.data.user));
-  return res;
+  debugger;
+  const {
+    data: { user },
+  } = await fetch("/api/session");
+  await dispatch(setUser(user));
+  dispatch(getNotes(user.id));
+  return user;
 };
 
 export const signup = (user) => async (dispatch) => {

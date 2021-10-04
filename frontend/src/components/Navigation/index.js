@@ -14,7 +14,7 @@ import ProfileButton from "./ProfileButton";
 import { signup, login } from "../../store/session";
 
 function Navigation({ isLoaded, toggleSidebar }) {
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user) || null;
 
   //       {/* <LoginFormModal /> */}
   //       <NavLink to="/signup">Sign Up</NavLink>

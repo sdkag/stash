@@ -10,11 +10,15 @@ module.exports = {
           email: "demo@user.io",
           username: "Demo-lition",
           hashedPassword: bcrypt.hashSync("password"),
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           email: "other@demo.io",
           username: "otherlition",
           hashedPassword: bcrypt.hashSync("password"),
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}

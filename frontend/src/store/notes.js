@@ -1,10 +1,12 @@
 import { fetch } from "./csrf.js";
-
 const FETCH_NOTES = "FETCH_NOTES";
 const SEARCH_NOTES = "SEARCH_NOTES";
-export const getNotes = () => async (dispatch) => {
+export const getNotes = (authorId) => async (dispatch) => {
+  if (!authorId) return;
   try {
-    const notes = await fetch("/api/notes");
+    const {
+      data: { notes },
+    } = await fetch(`/api/notes/${authorId}`);
     dispatch(fetchNotes(notes));
   } catch (error) {
     console.error(error);
@@ -62,9 +64,7 @@ const initialState = {
     },
   },
   allIds: [1, 2, 3],
-  Archive: [3],
-  Notes: [1, 2],
-  Pinned: [2],
+  byStatus: { Archive: [3], Notes: [1], Pinned: [2] },
   matchedSearch: [],
   matchesMetaById: {},
 };
@@ -72,15 +72,18 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_NOTES: //backend groupby, status order by created at
+      let pinned = [];
+      let notes = [];
+      let archive = [];
+      let byStatus = { pinned, notes, archive };
+
       return {
-        byId: action.payload.reduce(
-          (state, note) => ({
-            ...state,
-            [note.id]: note,
-          }),
-          {}
-        ),
+        byId: action.payload.reduce((state, note) => {
+          byStatus[note.status].push(note.id);
+          return { ...state, [note.id]: note };
+        }, {}),
         allIds: action.payload.map(({ id }) => id),
+        byStatus,
       };
     case SEARCH_NOTES:
       let matchIds = [];
@@ -96,7 +99,6 @@ function reducer(state = initialState, action) {
           matchesMetaById[id] = { title };
         }
       });
-      debugger;
       return {
         ...state,
         matchedSearch: { ...matchIds }, //because... why you not workin'

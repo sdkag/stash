@@ -11,19 +11,22 @@ function App() {
   const dispatch = useDispatch();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
+  const [sessionUser, setUser] = useState(null);
+  // sessionUser;
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser()).then((user) => setUser(user));
   }, [dispatch]);
 
   return (
     <>
-      <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} />
+      {/* <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} /> */}
+      <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
 
       <SideBar isSidebarOpen={isSidebarOpen} />
 
-      {isLoaded && (
+      {sessionUser && (
         <Switch>
           <Route path="/login">
             <LoginFormPage />
@@ -31,7 +34,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
         </Switch>

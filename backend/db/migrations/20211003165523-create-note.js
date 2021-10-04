@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn("now"),
       },
-      userId: {
+      authorId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
