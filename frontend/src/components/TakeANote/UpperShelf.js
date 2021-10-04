@@ -1,13 +1,21 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function LowerShelf() {
+import * as takeNoteActions from "../../store/takeNote";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbtack as faPinned } from "@fortawesome/free-solid-svg-icons";
+export default function UpperShelf() {
+  const title = useSelector((state) => state.takeNote.noteState.title);
+
+  const pinned = useSelector((state) => state.takeNote.noteState.pinned);
+
   return (
-    <div className="bottom-self">
-      <div className="active-buttons">
-        <div className="icons">
-          <i>palette</i> <i>archive</i>
-        </div>
-        <button className="close">Close</button>
+    <div className="top-shelf">
+      <div className="title">
+        <input type="text" placeholder="Title" className="input-title" />
+      </div>
+      <div className="pinned">
+        <FontAwesomeIcon icon={faPinned} />
       </div>
     </div>
   );

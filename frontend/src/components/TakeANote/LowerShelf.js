@@ -1,11 +1,42 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as takeNoteActions from "../../store/takeNote";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDownload as faArchive,
+  faPalette,
+} from "@fortawesome/free-solid-svg-icons";
 
-export default function TopShelf() {
+export default function LowerShelf() {
+  const toggleState = (e, state) => {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(takeNoteActions.toggleState(state));
+  };
+  const archive = useSelector((state) => state.takeNote.noteState.archive);
+  const color = useSelector((state) => state.takeNote.noteState.color);
   return (
-    <div className="top-shelf">
-      <div className="title">Take a note</div>
-      <input type="text" placeholder="Title" className="input-title" />
-      <div className="content"></div>
+    <div className="lower-self">
+      <div className="active-buttons">
+        <div className="icons">
+          <FontAwesomeIcon icon={faPalette} />
+          {/*onHoever, opens a 3/4 modal, use click and sumbit color*/}
+          <FontAwesomeIcon
+            icon={faArchive}
+            id="archive"
+            onClick={toggleState}
+          />
+        </div>
+        <button
+          className="close"
+          onClick={(e) => {
+            e.preventDefault();
+            takeNoteActions.createNote(); //closeForm. grab All of State. post to backed.
+          }}
+        >
+          Close
+        </button>
+      </div>
     </div>
   );
 }
