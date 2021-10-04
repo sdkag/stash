@@ -7,7 +7,9 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
-  const openMenu = () => {
+  const openMenu = (e) => {
+    e.preventDefault();
+    // debugger;
     if (showMenu) return;
     setShowMenu(true);
   };
@@ -32,9 +34,25 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
+        click me
         <i className="fas fa-user-circle" />
       </button>
-      {showMenu && !user && (
+      {showMenu && (
+        <ul className="profile-dropdown">
+          <li>{user.username}</li>
+          <li>{user.email}</li>
+          <li>
+            <button onClick={logout}>Log Out</button>
+          </li>
+          <li>
+            <NavLink to="login">Log In</NavLink>
+          </li>
+          <li>
+            <NavLink to="signup">Sign Up</NavLink>
+          </li>
+        </ul>
+      )}
+      {/* {showMenu && user && (
         <ul className="profile-dropdown">
           <li>{user.username}</li>
           <li>{user.email}</li>
@@ -42,19 +60,7 @@ function ProfileButton({ user }) {
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>
-      )}
-      {showMenu && user && (
-        <ul className="profile-dropdown">
-          <NavLink to="login">Log In</NavLink>
-          <NavLink to="signup">Sign Up</NavLink>
-
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
+      )} */}
     </>
   );
 }

@@ -5,14 +5,13 @@ import { queryStore } from "../../store/notes";
 const debounce = (thunk, timeOut, dispatch) => {
   //TODO: incorporate this properly
   let timer;
-  debugger;
-  return (...args) => {
-    clearTimeout(timer);
-    // debugger;
-    timer = setTimeout(() => {
-      dispatch(thunk(...args));
-    }, timeOut);
-  };
+  // debugger;
+  // return (...args) => {
+  clearTimeout(timer);
+  // debugger;
+  timer = setTimeout((args) => {
+    dispatch(thunk(...args));
+  }, timeOut);
 };
 
 export default function SearchBar({ children: searchIcon }) {
@@ -23,7 +22,7 @@ export default function SearchBar({ children: searchIcon }) {
   useEffect(() => {
     // debounce(queryStore, 1000, dispatch);
     dispatch(queryStore(searchTerm));
-    debugger;
+    // debugger;
   }, [dispatch, searchTerm]);
 
   const handleClose = () => {

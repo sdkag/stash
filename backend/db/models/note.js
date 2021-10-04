@@ -41,8 +41,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Note.prototype.toSafeObject = function () {
     // remember, this cannot be an arrow function
-    const { id, title, content, status, createdAt, Author } = this; // context will be the Note instance
-    return { id, title, content, status, createdAt, Author };
+    const { id, title, content, status, createdAt } = this; // context will be the Note instance
+    return { id, title, content, status, createdAt };
   };
   return Note;
 };
