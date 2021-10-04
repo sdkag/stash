@@ -9,7 +9,7 @@ function ProfileButton({ user }) {
 
   const openMenu = (e) => {
     e.preventDefault();
-    // debugger;
+    // ;
     if (showMenu) return;
     setShowMenu(true);
   };

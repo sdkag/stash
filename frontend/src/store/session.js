@@ -25,7 +25,6 @@ export const login =
   };
 
 export const restoreUser = () => async (dispatch) => {
-  debugger;
   const {
     data: { user },
   } = await fetch("/api/session");

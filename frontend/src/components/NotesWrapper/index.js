@@ -7,7 +7,7 @@ export default function NotesWrapper({ status: slowerStatus }) {
   return (
     <>
       {status === "Archive" && <NotesContainer status={"Archive"} />}
-      {status === "NotesContainers" && (
+      {status === "Notes" && (
         <>
           {" "}
           <NotesContainer status={"Pinned"} />
