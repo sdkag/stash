@@ -67,7 +67,7 @@ const initialState = {
     },
   },
   allIds: [1, 2, 3],
-  byStatus: { Archive: [3], Notes: [1], Pinned: [2] },
+  byStatus: { archive: [3], notes: [1], pinned: [2] },
   matchedSearch: [],
   matchesMetaById: {},
 };

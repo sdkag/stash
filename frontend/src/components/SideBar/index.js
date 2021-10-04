@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setTabStatus } from "../../store/tabs";
+import { setTab } from "../../store/tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLightbulb,
@@ -14,7 +14,7 @@ export default function SideBar({ isSidebarOpen: isOpen }) {
   // const [open, toggleOpen] = useState(false);
 
   const handleClick = ({ target: { id } }) => {
-    if (["Notes", "Archive"].includes(id)) dispatch(setTabStatus(id));
+    if (["Notes", "Archive"].includes(id)) dispatch(setTab(id));
   };
   return (
     <>
