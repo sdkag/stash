@@ -3,13 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session";
 import notes from "./notes";
 import tabs from "./tabs";
-import createNote from "./createNote";
+import takeNote from "./takeNote";
 
 const rootReducer = combineReducers({
   session,
   notes,
   tabs,
-  createNote,
+  takeNote,
 });
 
 let enhancer;
