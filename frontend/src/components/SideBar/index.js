@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setTypeStatus } from "../../store/types";
+import { setTab } from "../../store/tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLightbulb,
@@ -10,10 +10,11 @@ import {
 import "./SideBar.css";
 export default function SideBar({ isSidebarOpen: isOpen }) {
   const dispatch = useDispatch();
+  const selectedTab = useSelector((state) => state.tabs.selectedTab);
   // const [open, toggleOpen] = useState(false);
 
   const handleClick = ({ target: { id } }) => {
-    if (["Notes", "Archive"].includes(id)) dispatch(setTypeStatus(id));
+    if (["Notes", "Archive"].includes(id)) dispatch(setTab(id));
   };
   return (
     <>
@@ -23,13 +24,19 @@ export default function SideBar({ isSidebarOpen: isOpen }) {
         className={`${isOpen ? "sidebar sidebar-open" : "sidebar"}`}
       >
         <ul className="sidebar-links">
-          <li id="Notes">
+          <li
+            id="Notes"
+            className={selectedTab === "Notes" ? "selectedTab" : ""}
+          >
             <div className="sidebar_link">
               <FontAwesomeIcon icon={faLightbulb} />
               {isOpen && <div to="/">Notes</div>}
             </div>
           </li>
-          <li id="Archive">
+          <li
+            id="Archive"
+            className={selectedTab === "Archive" ? "selectedTab" : ""}
+          >
             <div className="sidebar_link">
               <FontAwesomeIcon icon={faArchive} />
               {isOpen && <div to="/">Archive</div>}

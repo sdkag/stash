@@ -1,17 +1,6 @@
 import { fetch } from "./csrf.js";
 const FETCH_NOTES = "FETCH_NOTES";
 const SEARCH_NOTES = "SEARCH_NOTES";
-export const getNotes = (authorId) => async (dispatch) => {
-  if (!authorId) return;
-  try {
-    const {
-      data: { notes },
-    } = await fetch(`/api/notes/${authorId}`);
-    dispatch(fetchNotes(notes));
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 const searchStore = (searchTerm, str) => {
   const regexp = new RegExp(searchTerm, "gi");
@@ -34,15 +23,29 @@ const searchNotes = (searchTerm) => ({
   type: SEARCH_NOTES,
   payload: searchTerm,
 });
-export const queryStore = (searchTerm) => (dispatch) => {
-  if (!searchTerm) return;
-  dispatch(searchNotes(searchTerm));
-};
 
 const fetchNotes = (notes) => ({
   type: FETCH_NOTES,
   payload: notes,
 });
+
+//THUNKS
+export const getNotes = (authorId) => async (dispatch) => {
+  if (!authorId) return;
+  try {
+    const {
+      data: { notes },
+    } = await fetch(`/api/notes/${authorId}`);
+    dispatch(fetchNotes(notes));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const queryStore = (searchTerm) => (dispatch) => {
+  if (!searchTerm) return;
+  dispatch(searchNotes(searchTerm));
+};
 
 const initialState = {
   byId: {
@@ -64,7 +67,7 @@ const initialState = {
     },
   },
   allIds: [1, 2, 3],
-  byStatus: { Archive: [3], Notes: [1], Pinned: [2] },
+  byStatus: { archive: [3], notes: [1], pinned: [2] },
   matchedSearch: [],
   matchesMetaById: {},
 };
