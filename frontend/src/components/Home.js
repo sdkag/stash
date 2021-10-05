@@ -10,7 +10,7 @@ export default function Home({ sessionUser }) {
   return (
     <>
       <h1>Home</h1>
-      {/* {user && <h4>Please login to get to the Stash</h4>} */}``
+      {/* {user && <h4>Please login to get to the Stash</h4>} */}
       <NotesContainer selectedTab={selectedTab} />
     </>
   );

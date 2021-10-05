@@ -1,6 +1,7 @@
 import { fetch } from "./csrf.js";
 const FETCH_NOTES = "FETCH_NOTES";
 const SEARCH_NOTES = "SEARCH_NOTES";
+export const ADD_NOTE = "ADD_NOTE";
 
 const searchStore = (searchTerm, str) => {
   const regexp = new RegExp(searchTerm, "gi");
@@ -19,6 +20,10 @@ const searchStore = (searchTerm, str) => {
   return array;
 };
 
+export const addNote = (note) => ({
+  type: ADD_NOTE,
+  payload: note,
+});
 const searchNotes = (searchTerm) => ({
   type: SEARCH_NOTES,
   payload: searchTerm,
@@ -74,6 +79,24 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    //TODO trace structure for allowing offline interaction.
+    case ADD_NOTE: //this is how you can have the app work `offline`
+      const tempByStatus = {
+        archive: [...state.byStatus.archive],
+        notes: [...state.byStatus.notes],
+        pinned: [...state.byStatus.pinned],
+      };
+      tempByStatus[action.payload.status].unshift("temp");
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          temp: action.payload,
+        },
+        allIds: ["temp", ...state.allIds],
+        byStatus: tempByStatus,
+      };
     case FETCH_NOTES: //backend groupby, status order by created at
       let pinned = [];
       let notes = [];
