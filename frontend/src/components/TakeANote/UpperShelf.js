@@ -5,9 +5,9 @@ import * as takeNoteActions from "../../store/takeNote";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbtack as faPinned } from "@fortawesome/free-solid-svg-icons";
 export default function UpperShelf() {
-  const title = useSelector((state) => state.takeNote.noteState.title);
+  const title = useSelector((state) => state.takeNote.title);
 
-  const pinned = useSelector((state) => state.takeNote.noteState.pinned);
+  const pinned = useSelector((state) => state.takeNote.pinned);
 
   return (
     <div className="top-shelf">

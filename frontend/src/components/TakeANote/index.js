@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UpperShelf, MiddleShelf, LowerShelf } from "./TakeNote";
+import UpperShelf from "./UpperShelf";
+import LowerShelf from "./LowerShelf";
+import MiddleShelf from "./MiddleShelf";
 import * as takeNoteActions from "../../store/takeNote";
 
 export default function TakeANote() {
@@ -9,12 +11,7 @@ export default function TakeANote() {
   return (
     <div className="take-a-note">
       {isOpen && <UpperShelf />}
-      <MiddleShelf
-        onClick={() => {
-          //useRef to focus on textarea
-          dispatch(takeNoteActions.openTakeNote());
-        }}
-      />
+      <MiddleShelf />
       {isOpen && <LowerShelf />}
     </div>
   );

@@ -14,8 +14,8 @@ export default function LowerShelf() {
     e.preventDefault();
     dispatch(takeNoteActions.toggleState(state));
   };
-  const archive = useSelector((state) => state.takeNote.noteState.archive);
-  const color = useSelector((state) => state.takeNote.noteState.color);
+  const archive = useSelector((state) => state.takeNote.archive);
+  const color = useSelector((state) => state.takeNote.color);
   return (
     <div className="lower-self">
       <div className="active-buttons">
