@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function LowerShelf() {
+  const dispatch = useDispatch();
   const toggleState = (e, state) => {
     e.stopPropagation();
     e.preventDefault();

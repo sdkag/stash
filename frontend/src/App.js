@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/Forms/SignupFormPage";
 import LoginFormPage from "./components/Forms/LoginFormPage";
+import * as takeNoteActions from "./store/takeNote";
+
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SideBar from "./components/SideBar";
@@ -22,6 +24,7 @@ function App() {
   return (
     <>
       {/* <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} /> */}
+
       <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
 
       <SideBar isSidebarOpen={isSidebarOpen} />
@@ -43,4 +46,15 @@ function App() {
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  const dispatch = useDispatch();
+  return (
+    <div className="AppWrapper app-window">
+      <App
+        onClick={(e) => {
+          dispatch(takeNoteActions.createNote());
+        }}
+      />
+    </div>
+  );
+}

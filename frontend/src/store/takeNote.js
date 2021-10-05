@@ -15,14 +15,8 @@ export const togglePinned = () => ({
   type: TOGGLE_PINNED,
 });
 
-export const toggleState = (state) => (dispatch, getState) => {
-  getState().takeNote;
-  if (state === "pinned") {
-    dispatch(togglePinned());
-  } else if (state === "archived") {
-    dispatch(toggleArchived());
-  }
-};
+export const toggleState = (whichState) =>
+  ({ toggleArchived, togglePinned }[whichState]());
 
 export const toggleArchived = () => ({
   type: TOGGLE_ARCHIVED,
@@ -54,6 +48,9 @@ export default function reducer(state = initialState, action) {
         ...state,
         isOpen: action.payload,
       };
+
+    // onst TOGGLE_STATE: state[action.payload] = !state[action.payload];
+    // return { ...state };
     case TOGGLE_PINNED:
       return {
         ...state,

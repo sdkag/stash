@@ -25,13 +25,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 function Root() {
-  const dispatch = useDispatch();
   return (
-    <ModalProvider
-      onClick={(e) => {
-        dispatch(takeNoteActions.createNote());
-      }}
-    >
+    <ModalProvider>
       <Provider store={store}>
         <BrowserRouter>
           <App />
