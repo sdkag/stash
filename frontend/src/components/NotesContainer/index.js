@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Note from "./Note";
 import "./Note.css";
-
+import CreateNoteInput from "../TakeANote";
 export default function NotesContainer({ selectedTab }) {
   const noteSliceIds = useSelector(
     (state) => state.notes.byStatus[selectedTab]
@@ -11,6 +11,7 @@ export default function NotesContainer({ selectedTab }) {
 
   return (
     <>
+      <CreateNoteInput />
       <section>
         <h3>Pinned Notes</h3>
         {pinnedNotesIds.length > 0 && (

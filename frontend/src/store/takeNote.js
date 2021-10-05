@@ -21,6 +21,10 @@ export const toggleState = (whichState) =>
 export const toggleArchived = () => ({
   type: TOGGLE_ARCHIVED,
 });
+export const setContent = (content) => ({
+  type: SET_CONTENT,
+  payload: content,
+});
 
 export const setColor = (color) => ({
   type: SET_COLOR,
@@ -73,7 +77,8 @@ export default function reducer(state = initialState, action) {
       };
     case SET_CONTENT:
       return {
-        title: action.payload,
+        ...state,
+        content: action.payload,
       };
     case SUBMIT:
       return {
