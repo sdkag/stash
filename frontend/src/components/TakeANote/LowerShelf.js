@@ -32,7 +32,8 @@ export default function LowerShelf() {
           className="close"
           onClick={(e) => {
             e.preventDefault();
-            takeNoteActions.createNote(); //closeForm. grab All of State. post to backed.
+            debugger;
+            dispatch(takeNoteActions.createNote()); //closeForm. grab All of State. post to backed.
           }}
         >
           Close

@@ -1,8 +1,8 @@
+import { ADD_NOTE as CLEAR_CONTENT } from "./notes";
 const SET_IS_OPEN = "takeNote/SET_IS_OPEN";
 const TOGGLE_PINNED = "takeNote/TOGGLE_PINNED";
 const TOGGLE_ARCHIVED = "takeNote/TOGGLE_ARCHIVED";
 const SET_COLOR = "takeNote/SET_COLOR";
-const SUBMIT = "takeNote/SUBMIT";
 const SET_TITLE = "takeNote/SET_TITLE";
 const SET_CONTENT = "takeNote/SET_CONTENT";
 
@@ -28,15 +28,42 @@ export const setContent = (content) => ({
 
 export const setColor = (color) => ({
   type: SET_COLOR,
-  action: color,
+  payload: color,
 });
 
 export const setTitle = (title) => ({
   type: SET_TITLE,
-  action: title,
+  payload: title,
 });
 
-export const createNote = () => async (dispatch) => {};
+const addNote = (note) => {
+  return {
+    type: CLEAR_CONTENT,
+    payload: note,
+  };
+};
+
+const processNoteState = ({ _isOpen, isArchived, isPinned, ...body }) => {
+  return {
+    ...body,
+    status: isPinned || isArchived || "notes",
+  };
+};
+export const createNote = () => async (dispatch, getStore) => {
+  const note = getStore().takeNote;
+  const processedNote = processNoteState(note);
+  dispatch(addNote(processedNote));
+
+  // const response = await fetch("/api/notes", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(body),
+  // });
+  // const data = await response.json();
+};
+
 const initialState = {
   isOpen: false,
   isPinned: false,
@@ -80,7 +107,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         content: action.payload,
       };
-    case SUBMIT:
+    case CLEAR_CONTENT:
       return {
         ...initialState,
       };
