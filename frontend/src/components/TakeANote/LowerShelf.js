@@ -9,12 +9,12 @@ import {
 
 export default function LowerShelf() {
   const dispatch = useDispatch();
-  const toggleState = (e, state) => {
+  const toggleArchived = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    dispatch(takeNoteActions.toggleState(state));
+    dispatch(takeNoteActions.toggleArchived());
   };
-  const archive = useSelector((state) => state.takeNote.archive);
+  const isArchived = useSelector((state) => state.takeNote.isArchived);
   const color = useSelector((state) => state.takeNote.color);
   return (
     <div className="lower-self">
@@ -25,7 +25,8 @@ export default function LowerShelf() {
           <FontAwesomeIcon
             icon={faArchive}
             id="archive"
-            onClick={toggleState}
+            classList={isArchived ? "active-icon" : ""}
+            onClick={toggleArchived}
           />
         </div>
         <button

@@ -15,9 +15,6 @@ export const togglePinned = () => ({
   type: TOGGLE_PINNED,
 });
 
-export const toggleState = (whichState) =>
-  ({ toggleArchived, togglePinned }[whichState]());
-
 export const toggleArchived = () => ({
   type: TOGGLE_ARCHIVED,
 });

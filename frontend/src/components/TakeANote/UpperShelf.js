@@ -7,8 +7,13 @@ import { faThumbtack as faPinned } from "@fortawesome/free-solid-svg-icons";
 export default function UpperShelf() {
   const dispatch = useDispatch();
   const title = useSelector((state) => state.takeNote.title) || "";
+  const isPinned = useSelector((state) => state.takeNote.isPinned);
 
-  const pinned = useSelector((state) => state.takeNote.pinned);
+  const togglePinned = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(takeNoteActions.togglePinned());
+  };
 
   const handleInput = ({ target: { value } }) => {
     // setContent(value);
@@ -25,8 +30,8 @@ export default function UpperShelf() {
           onChange={handleInput}
         />
       </div>
-      <div className="pinned">
-        <FontAwesomeIcon icon={faPinned} />
+      <div className={"pin " + isPinned ? "active-icon" : ""}>
+        <FontAwesomeIcon icon={faPinned} onClick={togglePinned} />
       </div>
     </div>
   );
