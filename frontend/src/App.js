@@ -27,17 +27,17 @@ function App() {
   return (
     <div className="stashit">
       {/* <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} /> */}
-      <section class="navigation">
+      <div class="navigation">
         <Navigation
           toggleSidebar={setIsSidebarOpen}
           sessionUser={sessionUser}
         />
-        section
-      </section>
-      <section className="sidebar">
+        div
+      </div>
+      <div className="sidebar">
         <SideBar isSidebarOpen={isSidebarOpen} />
-      </section>
-      <section className="mainpage">
+      </div>
+      <div className="mainpage">
         {sessionUser && (
           <Switch>
             <Route path="/splash">
@@ -48,7 +48,7 @@ function App() {
             </Route>
           </Switch>
         )}
-      </section>
+      </div>
     </div>
   );
 }
