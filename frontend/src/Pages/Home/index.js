@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import NotesContainer from "./NotesContainer";
-import { getNotes } from "../store/notes";
+import NotesContainer from "../../components/NotesContainer";
+// import { getNotes } from "../../store/notes";
 export default function Home({ sessionUser }) {
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.session.user) || null;

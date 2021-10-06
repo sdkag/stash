@@ -8,7 +8,10 @@ import * as takeNoteActions from "./store/takeNote";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SideBar from "./components/SideBar";
-import Home from "./components/Home";
+import Home from "./Pages/Home/";
+import Splash from "./Pages/Splash";
+
+import styles from "./index.css";
 function App() {
   const dispatch = useDispatch();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,31 +25,38 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="stashit">
       {/* <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} /> */}
-
-      <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
-
-      <SideBar isSidebarOpen={isSidebarOpen} />
-
-      {sessionUser && (
-        <Switch>
-          <Route path="/splash">
-            <Splash />
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-        </Switch>
-      )}
-    </>
+      <section class="navigation">
+        <Navigation
+          toggleSidebar={setIsSidebarOpen}
+          sessionUser={sessionUser}
+        />
+        section
+      </section>
+      <section className="sidebar">
+        <SideBar isSidebarOpen={isSidebarOpen} />
+      </section>
+      <section className="mainpage">
+        {sessionUser && (
+          <Switch>
+            <Route path="/splash">
+              <Splash />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </Switch>
+        )}
+      </section>
+    </div>
   );
 }
 
 export default function AppWrapper() {
   const dispatch = useDispatch();
   return (
-    <div className="AppWrapper app-window">
+    <div className={styles.stashit}>
       <App
         onClick={(e) => {
           dispatch(takeNoteActions.createNote());
