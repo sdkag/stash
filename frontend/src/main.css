@@ -1,0 +1,32 @@
+.stashit {
+	background-color: pink;
+	;
+	height: 100vh;
+	display: grid;
+	width: 100%;
+	border: 5px solid grey;
+	grid-template-columns: 80px 160px 30px 1fr;
+	grid-template-rows: 70px auto;
+	box-sizing: border-box;
+	grid-template-areas:
+		"navi navi navi navi"
+		"sidebar sidebar sidebar maincontent"
+}
+
+.navigation {
+
+	display: grid;
+	grid-area: "navi";
+	border: 1px solid black;
+}
+
+.sidebar {
+	grid-area: "sidebar";
+	border: 1px solid green;
+	height: 100%
+}
+
+.mainpage {
+	grid-area: "maincontent";
+	border: 2px solid black;
+}

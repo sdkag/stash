@@ -33,10 +33,5 @@ dependendcies = [
   "jsonwebtoken",
   "jwt-decode",
   "validator",
-  [
-    {
-      devDependencies: ["nodemon", "dotenv-cli"],
-    },
-  ],
 ];
 ```
