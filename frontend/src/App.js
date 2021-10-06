@@ -31,11 +31,8 @@ function App() {
 
       {sessionUser && (
         <Switch>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
+          <Route path="/splash">
+            <Splash />
           </Route>
           <Route exact path="/">
             <Home />
