@@ -3,18 +3,7 @@ import { useDispatch } from "react-redux";
 import { queryStore } from "../../store/notes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
-const debounce = (thunk, timeOut, dispatch) => {
-  //TODO: incorporate this properly
-  let timer;
-  // ;
-  // return (...args) => {
-  clearTimeout(timer);
-  // ;
-  timer = setTimeout((args) => {
-    dispatch(thunk(...args));
-  }, timeOut);
-};
+// import {debounce} from '../../utils'
 
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,6 +11,7 @@ export default function SearchBar() {
 
   // ;
   useEffect(() => {
+    // TODO : implement debounce
     // debounce(queryStore, 1000, dispatch);
     dispatch(queryStore(searchTerm));
     // ;
@@ -46,5 +36,3 @@ export default function SearchBar() {
     </>
   );
 }
-
-// throttle /debounce

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import * as tabsActions from "../../store/tabs";
 import { setTab } from "../../store/tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -25,6 +25,10 @@ export default function SideBar({ isSidebarOpen: isOpen }) {
       >
         <ul className="sidebar-links">
           <li
+            onClick={() => {
+              if (selectedTab !== "notes")
+                dispatch(tabsActions.setTab("notes"));
+            }}
             id="Notes"
             className={selectedTab === "Notes" ? "selectedTab" : ""}
           >
@@ -34,6 +38,10 @@ export default function SideBar({ isSidebarOpen: isOpen }) {
             </div>
           </li>
           <li
+            onClick={() => {
+              if (selectedTab !== "archived")
+                dispatch(tabsActions.setTab("archived"));
+            }}
             id="Archive"
             className={selectedTab === "Archive" ? "selectedTab" : ""}
           >
