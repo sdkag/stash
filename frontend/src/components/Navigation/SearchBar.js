@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { queryStore } from "../../store/notes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const debounce = (thunk, timeOut, dispatch) => {
   //TODO: incorporate this properly
@@ -14,7 +16,7 @@ const debounce = (thunk, timeOut, dispatch) => {
   }, timeOut);
 };
 
-export default function SearchBar({ children: searchIcon }) {
+export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
 
@@ -29,8 +31,8 @@ export default function SearchBar({ children: searchIcon }) {
     console.log("lets handle close");
   };
   return (
-    <div className="search-bar">
-      {searchIcon}
+    <>
+      <FontAwesomeIcon icon={faSearch} />
       <input
         value={searchTerm}
         placeholder="Search"
@@ -41,7 +43,7 @@ export default function SearchBar({ children: searchIcon }) {
       />
       <div onClick={handleClose}>x</div>
       {/* <FontAwesomeIcon icon={faSearch} />	 */}
-    </div>
+    </>
   );
 }
 

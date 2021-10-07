@@ -4,12 +4,14 @@ import session from "./session";
 import notes from "./notes";
 import tabs from "./tabs";
 import takeNote from "./takeNote";
+import users from "./users";
 
 const rootReducer = combineReducers({
   session,
   notes,
   tabs,
   takeNote,
+  users,
 });
 
 let enhancer;

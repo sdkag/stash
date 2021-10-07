@@ -30,6 +30,13 @@
 
 }
 
+.notes_section {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+
+}
+
 .notes-iconRow {
 	border: 1 px solid red;
 }

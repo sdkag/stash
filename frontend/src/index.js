@@ -14,6 +14,7 @@ import * as sessionActions from "./store/session";
 import * as takeNoteActions from "./store/takeNote";
 import * as tabActions from "./store/tabs";
 import * as notesActions from "./store/notes";
+import * as usersActions from "./store/users";
 
 const store = configureStore();
 

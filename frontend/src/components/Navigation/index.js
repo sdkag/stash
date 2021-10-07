@@ -24,29 +24,27 @@ function Navigation({ isLoaded, toggleSidebar }) {
   // }
 
   return (
-    <ul>
-      <li>
-        <div onClick={() => toggleSidebar((prevState) => !prevState)}>
-          <FontAwesomeIcon icon={faHamburger} />
+    <>
+      <section
+        className="nav1"
+        onClick={() => toggleSidebar((prevState) => !prevState)}
+      >
+        <FontAwesomeIcon icon={faHamburger} />
+      </section>
+      <section className="nav2">
+        <FontAwesomeIcon icon={faLightbulb} />
+        <div>Keep</div>
+      </section>
+      <section className="nav3">
+        <div className="searchbar">
+          <SearchBar />
         </div>
-      </li>
-      <li>
-        <div>
-          <FontAwesomeIcon icon={faLightbulb} />
-          Keep
-        </div>
-      </li>
-      <li>
-        <div>
-          <SearchBar>
-            <FontAwesomeIcon icon={faSearch} />
-          </SearchBar>
-          Keep
-        </div>
-      </li>
-
-      <li>{isLoaded && <ProfileButton user={sessionUser} />}</li>
-    </ul>
+      </section>
+      <section className="nav4">
+        {/* {isLoaded && <ProfileButton user={sessionUser} />} */}
+        <ProfileButton user={sessionUser} />
+      </section>
+    </>
   );
 }
 

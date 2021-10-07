@@ -27,13 +27,9 @@ function App() {
   return (
     <div className="stashit">
       {/* <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} /> */}
-      <div class="navigation">
-        <Navigation
-          toggleSidebar={setIsSidebarOpen}
-          sessionUser={sessionUser}
-        />
-        div
-      </div>
+
+      <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
+
       <div className="sidebar">
         <SideBar isSidebarOpen={isSidebarOpen} />
       </div>

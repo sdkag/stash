@@ -26,9 +26,15 @@ router.get("/restore-user", restoreUser, (req, res) => {
   return res.json(req.user);
 });
 
-router.get("/me", (req, res) => {
-  return res.json({ message: "hello world" });
-});
+router.get(
+  "/users",
+  asyncHandler(async (req, res) => {
+    console.log("\n\n\n\n\n\n", "we hit the USERRRSRRSS route");
+    const users = await User.findAll();
+    console.log(users);
+    return res.json({ users });
+  })
+);
 // // GET /api/require-auth
 // const { requireAuth } = require('../../utils/auth.js');
 // router.get(

@@ -104,6 +104,7 @@ function reducer(state = initialState, action) {
       let byStatus = { pinned, notes, archive };
 
       return {
+        ...state,
         byId: action.payload.reduce((state, note) => {
           byStatus[note.status].push(note.id);
           return { ...state, [note.id]: note };

@@ -3,6 +3,19 @@ import { useSelector } from "react-redux";
 import Note from "./Note";
 import "./Note.css";
 import CreateNoteInput from "../TakeANote";
+
+
+
+function Notes({noteIds}){
+
+  return noteIds ?  <div className="notes-section">
+  <title>{selectedTab}</title>
+  {noteIds.map((noteId) => <Note key={noteId} noteId={noteId} />)}
+</div> : null
+
+}
+
+
 export default function NotesContainer({ selectedTab }) {
   const noteSliceIds = useSelector(
     (state) => state.notes.byStatus[selectedTab]
@@ -14,30 +27,12 @@ export default function NotesContainer({ selectedTab }) {
         <h2>Archived Notes</h2>
       </>
     ) : (
-      <>
-        <section>
-          <h3>Pinned Notes</h3>
-          {pinnedNotesIds.length > 0 && (
-            <>
-              <title>Pinned</title>
-              {pinnedNotesIds.map((noteId) => {
-                return <Note key={noteId} noteId={noteId} />;
-              })}
-            </>
-          )}
-        </section>
-        <section>
-          <h3>Notes Container</h3>
-          {noteSliceIds && noteSliceIds.length > 0 && (
-            <>
-              <title>{selectedTab}</title>
-              {noteSliceIds.map((noteId) => (
-                <Note key={noteId} noteId={noteId} />
-              ))}
-            </>
-          )}
-        </section>
-      </>
+      <div className="notes sections">
+          {pinnedNotesIds.length > 0 && <Pinned pinnedNotesIds={pinnedNotesIds}/>}
+          {noteSliceIds && noteSliceIds.length > 0 && <
+          }
+      </div>
+      </div>
     );
 
   return (
