@@ -14,10 +14,22 @@ export default function DropDown({ showMenu, users }) {
       </section>
       <section className="dropdown--partB signOthers">
         Login as:
-        {users &&
+        <button
+          onClick={() =>
+            dispatch(
+              sessionActions.login({
+                credential: "Demo-lition",
+                password: "password",
+              })
+            )
+          }
+        >
+          DemoUser
+        </button>
+        {/* {users &&
           Object.values(users).map((user, idx) => (
             <button key={idx}>{user.username}</button>
-          ))}
+          ))} */}
       </section>
       <section className="dropdown--partC logout all">
         Or..

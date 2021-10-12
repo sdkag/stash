@@ -36,8 +36,7 @@ router.post(
       return next(err);
     }
 
-    await setTokenCooki;
-    e(res, user);
+    await setTokenCookie(res, user);
 
     return res.json({
       user,
@@ -58,7 +57,7 @@ router.get("/", restoreUser, (req, res) => {
     return res.json({
       user: user.toSafeObject(),
     });
-  } else return user;
+  } else return res.json({});
 });
 
 module.exports = router;
