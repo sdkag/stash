@@ -24,15 +24,13 @@ function App() {
   return (
     <div className="stashit">
       {/* <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} /> */}
-
       <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
-
       <section className="sidebar-maincontent">
         <div className={`sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
           <SideBar isSidebarOpen={isSidebarOpen} />
         </div>
         <div className="main-content">
-          {sessionUser && <Home sessionUser={sessionUser} />}
+          <Home sessionUser={sessionUser} />
         </div>
       </section>
     </div>
@@ -42,12 +40,12 @@ function App() {
 export default function AppWrapper() {
   const dispatch = useDispatch();
   return (
-    <div className={styles.stashit}>
+    <>
       <App
         onClick={(e) => {
           dispatch(takeNoteActions.createNote());
         }}
       />
-    </div>
+    </>
   );
 }

@@ -14,7 +14,6 @@ export default function SideBar({ isSidebarOpen: isOpen }) {
   };
   return (
     <>
-      <h1>Sidebar</h1>
       <div
         onClick={handleClick}
         className={`${isOpen ? "sidebar sidebar-open" : "sidebar"}`}
