@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { getUsers } from "../../store/users";
-
-function ProfileButton({ user }) {
+import DropDown from "../DropDown";
+function ProfileButton({ isDropDown, user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -36,55 +36,21 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
   };
-  let me = `
-  < className="profile-dropdown">
-  <li>{user.username}</li>
-  <li>{user.email}</li>
-  <li>
-    <button onClick={logout}>Log Out</button>
-  </li>
-  <li>
-    <NavLink to="login">Log In</NavLink>
-  </li>
-  <li>
-    <NavLink to="signup">Sign Up</NavLink>
-  </li>
-</ul>`;
+  const closeModalSideEffect = (stateVar, closeModal) => {
+    if (!stateVar) return;
 
+    document.addEventListener("click", closeModal);
+    return () => document.removeEventListener("click", closeModal);
+  };
+  // TODO:add default ima ge to user, and pull that in here.
   return (
-    <>
+    <div className="dropdown dropdown--container">
       <button onClick={openMenu}>
-        Profile Dropdown
+        Profile
         <i className="fas fa-user-circle" />
       </button>
-      {showMenu && (
-        <menu className="profile-dropdown">
-          <button>Edit User</button>
-          <button onClick={logout}>Log Out</button>
-
-          <button>Log In</button>
-
-          <button>Sign Up</button>
-          {users && (
-            <div>
-              sign in as different user
-              {Object.values(users).map((user) => (
-                <button>LogIn as {user.username}</button>
-              ))}
-            </div>
-          )}
-        </menu>
-      )}
-      {/* {showMenu && user && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )} */}
-    </>
+      <DropDown showMenu={showMenu} users={users} />
+    </div>
   );
 }
 

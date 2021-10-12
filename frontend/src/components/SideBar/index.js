@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as tabsActions from "../../store/tabs";
 import { setTab } from "../../store/tabs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLightbulb,
-  faDownload as faArchive,
-} from "@fortawesome/free-solid-svg-icons";
 import "./SideBar.css";
+import { lightbulbSvg, archivedSvg } from "../../svgs";
 export default function SideBar({ isSidebarOpen: isOpen }) {
   const dispatch = useDispatch();
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
@@ -33,7 +29,8 @@ export default function SideBar({ isSidebarOpen: isOpen }) {
             className={selectedTab === "Notes" ? "selectedTab" : ""}
           >
             <div className="sidebar_link">
-              <FontAwesomeIcon icon={faLightbulb} />
+              {/* <FontAwesomeIcon icon={faLightbulb} /> */}
+              {lightbulbSvg}
               {isOpen && <div to="/">Notes</div>}
             </div>
           </li>
@@ -45,8 +42,9 @@ export default function SideBar({ isSidebarOpen: isOpen }) {
             id="Archive"
             className={selectedTab === "Archive" ? "selectedTab" : ""}
           >
-            <div className="sidebar_link">
-              <FontAwesomeIcon icon={faArchive} />
+            <div className="sidebar_link archived">
+              {/* <FontAwesomeIcon icon={faArchive} /> */}
+              {archivedSvg}
               {isOpen && <div to="/">Archive</div>}
             </div>
           </li>

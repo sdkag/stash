@@ -30,21 +30,23 @@ function App() {
 
       <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
 
-      <div className="sidebar">
-        <SideBar isSidebarOpen={isSidebarOpen} />
-      </div>
-      <div className="mainpage">
-        {sessionUser && (
-          <Switch>
-            <Route path="/splash">
-              <Splash />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        )}
-      </div>
+      <section className="sidebar-maincontent">
+        <div className={`sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
+          <SideBar isSidebarOpen={isSidebarOpen} />
+        </div>
+        <div className="mainpage">
+          {sessionUser && (
+            <Switch>
+              <Route path="/splash">
+                <Splash />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Switch>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

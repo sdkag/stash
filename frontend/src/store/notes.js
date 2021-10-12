@@ -1,4 +1,5 @@
 import { fetch } from "./csrf.js";
+import { isLoading } from "./ui";
 const FETCH_NOTES = "FETCH_NOTES";
 const SEARCH_NOTES = "SEARCH_NOTES";
 export const ADD_NOTE = "ADD_NOTE";
@@ -13,10 +14,10 @@ const searchStore = (searchTerm, str) => {
   let array = [...str.matchAll(regexp)];
 
   console.log("is this actually Easier", isEasier);
-  console.log("is this the array that is supposedly easier", array);
   /*
   [ matchedTerm, index, input]
   */
+
   return array;
 };
 
@@ -37,6 +38,7 @@ const fetchNotes = (notes) => ({
 //THUNKS
 export const getNotes = (authorId) => async (dispatch) => {
   if (!authorId) return;
+  // dispatch(isLoading(true));
   try {
     const {
       data: { notes },
@@ -45,6 +47,8 @@ export const getNotes = (authorId) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
+  debugger;
+  // dispatch(isLoading(false));
 };
 
 export const queryStore = (searchTerm) => (dispatch) => {
@@ -102,7 +106,7 @@ function reducer(state = initialState, action) {
       let notes = [];
       let archive = [];
       let byStatus = { pinned, notes, archive };
-
+      debugger;
       return {
         ...state,
         byId: action.payload.reduce((state, note) => {
