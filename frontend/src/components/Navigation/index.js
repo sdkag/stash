@@ -3,51 +3,44 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // import LoginFormModal from '../LoginFormModal';
 import "./Navigation.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHamburger,
-  faLightbulb,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "./SearchBar";
 import ProfileButton from "./ProfileButton";
 import { signup, login } from "../../store/session";
-
-function Navigation({ isLoaded, toggleSidebar }) {
+import { searchSvg, hamburgerSvg } from "../../svgs";
+function Navigation({ fasterSessionUser: which, isLoaded, toggleSidebar }) {
+  //? ifasterSessinUser faster than sessionUser
   const sessionUser = useSelector((state) => state.session.user) || null;
-
-  //       {/* <LoginFormModal /> */}
-  //       <NavLink to="/signup">Sign Up</NavLink>
-  //     </>
-  // );
-
-  // }
+  const [isDropDown, setIsDropDown] = useState(false);
 
   return (
-    <>
-      <section
-        className="nav1"
+    <section className="navigation">
+      <div
+        className="nav1 hamburger navbar"
         onClick={() => toggleSidebar((prevState) => !prevState)}
       >
-        <FontAwesomeIcon icon={faHamburger} />
-      </section>
-      <section className="nav2">
-        <FontAwesomeIcon icon={faLightbulb} />
-        <div>Keep</div>
-      </section>
-      <section className="nav3">
-        <div className="searchbar">
+        {/* svg is from og site keep.google..com */}
+        {hamburgerSvg}
+      </div>
+      <div className="navbar nav2 logo">
+        <NavLink to="/">
+          <div>sTaSh</div>
+        </NavLink>
+        {/* <img src="https://i.imgur.com/XqQZQZL.png" alt="logo" /> */}
+      </div>
+      <div className="navbar search-container nav3">
+        <div className="search">
           <SearchBar />
         </div>
-      </section>
-      <section className="nav4">
+      </div>
+      <div className="navbar placeholder"></div>
+      <div className="navbar profile_button nav4">
         {/* {isLoaded && <ProfileButton user={sessionUser} />} */}
-        <ProfileButton user={sessionUser} />
-      </section>
-    </>
+        <ProfileButton isDropDown={isDropDown} sessionUser={sessionUser} />
+      </div>
+    </section>
   );
 }
 
 export default Navigation;
 // search icon;
-// hamburger button
+// hamburger buttonuu

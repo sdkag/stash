@@ -29,7 +29,7 @@ router.get("/restore-user", restoreUser, (req, res) => {
 router.get(
   "/users",
   asyncHandler(async (req, res) => {
-    console.log("\n\n\n\n\n\n", "we hit the USERRRSRRSS route");
+    console.log("\n\n\n\n\n\n", "get all users");
     const users = await User.findAll();
     console.log(users);
     return res.json({ users });

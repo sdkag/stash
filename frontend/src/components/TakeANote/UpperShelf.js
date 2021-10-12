@@ -1,9 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { pinnedSvg } from "../../svgs";
 import * as takeNoteActions from "../../store/takeNote";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbtack as faPinned } from "@fortawesome/free-solid-svg-icons";
 export default function UpperShelf() {
   const dispatch = useDispatch();
   const title = useSelector((state) => state.takeNote.title) || "";
@@ -30,8 +28,11 @@ export default function UpperShelf() {
           onChange={handleInput}
         />
       </div>
-      <div className={"pin " + isPinned ? "active-icon" : ""}>
-        <FontAwesomeIcon icon={faPinned} onClick={togglePinned} />
+      <div
+        onClick={togglePinned}
+        className={"pin " + isPinned ? "active-icon" : ""}
+      >
+        {pinnedSvg}
       </div>
     </div>
   );

@@ -1,12 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as takeNoteActions from "../../store/takeNote";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faDownload as faArchive,
-  faPalette,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { paletteSvg, archivedSvg } from "../../svgs";
+import PaletteDropdown from "./PaletteDropdown";
 export default function LowerShelf() {
   const dispatch = useDispatch();
   const toggleArchived = (e) => {
@@ -14,20 +10,32 @@ export default function LowerShelf() {
     e.preventDefault();
     dispatch(takeNoteActions.toggleArchived());
   };
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const isArchived = useSelector((state) => state.takeNote.isArchived);
   const color = useSelector((state) => state.takeNote.color);
+  const openPalette = (e) => {
+    e.preventDefault();
+    setPaletteOpen(true);
+  };
   return (
     <div className="lower-self">
       <div className="active-buttons">
         <div className="icons">
-          <FontAwesomeIcon icon={faPalette} />
           {/*onHoever, opens a 3/4 modal, use click and sumbit color*/}
-          <FontAwesomeIcon
-            icon={faArchive}
+          <div className="palette">
+            {paletteSvg}
+            onClick={openPalette}
+            <div className="paletteDropdown">
+              {paletteOpen && <PaletteDropdown />}
+            </div>
+          </div>
+          <div
             id="archive"
-            classList={isArchived ? "active-icon" : ""}
+            className={"archive  " + isArchived ? "active-icon" : ""}
             onClick={toggleArchived}
-          />
+          >
+            {archivedSvg}
+          </div>
         </div>
         <button
           className="close"

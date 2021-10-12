@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/Forms/SignupFormPage";
-import LoginFormPage from "./components/Forms/LoginFormPage";
+// ]import SignupFormPage from "./components/FormsSignupFormPage";
+// import LoginFormPage from "./components/Forms/LoginFormPage";
 import * as takeNoteActions from "./store/takeNote";
-
+import MainContent from "./components/MainContent";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SideBar from "./components/SideBar";
-import Home from "./Pages/Home/";
-import Splash from "./Pages/Splash";
 
 import styles from "./index.css";
 function App() {
@@ -30,21 +27,12 @@ function App() {
 
       <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
 
-      <div className="sidebar">
-        <SideBar isSidebarOpen={isSidebarOpen} />
-      </div>
-      <div className="mainpage">
-        {sessionUser && (
-          <Switch>
-            <Route path="/splash">
-              <Splash />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        )}
-      </div>
+      <section className="sidebar-maincontent">
+        <div className={`sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
+          <SideBar isSidebarOpen={isSidebarOpen} />
+        </div>
+        <div className="main-content">{sessionUser && <MainContent />}</div>
+      </section>
     </div>
   );
 }
