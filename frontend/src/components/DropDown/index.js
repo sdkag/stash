@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import "./Dropdown.css";
 export default function DropDown({ showMenu, users }) {
   const dispatch = useDispatch();
   return showMenu ? (
@@ -12,16 +13,17 @@ export default function DropDown({ showMenu, users }) {
         </button>
       </section>
       <section className="dropdown--partB signOthers">
-        sign in as...
-        {users && <div>sign in as different user</div>}
+        Login as:
         {users &&
           Object.values(users).map((user, idx) => (
-            <button key={idx}>LogIn as {user.username}</button>
+            <button key={idx}>{user.username}</button>
           ))}
       </section>
-      <section className="dropdown--partC logout all"></section>
-      <button>Log In</button>
-      <button>Sign Up</button>;
+      <section className="dropdown--partC logout all">
+        Or..
+        <button>Log In</button>
+        <button>Sign Up</button>;
+      </section>
     </menu>
   ) : null;
 }

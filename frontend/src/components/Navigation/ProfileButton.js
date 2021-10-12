@@ -44,7 +44,7 @@ function ProfileButton({ isDropDown, user }) {
   };
   // TODO:add default ima ge to user, and pull that in here.
   return (
-    <div className="dropdown dropdown--container">
+    <div className="dropdown ">
       <button onClick={openMenu}>
         Profile
         <i className="fas fa-user-circle" />
