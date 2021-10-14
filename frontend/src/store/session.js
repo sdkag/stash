@@ -30,7 +30,8 @@ export const restoreUser = () => async (dispatch) => {
   } = await fetch("/api/session");
   await dispatch(setUser(user));
   console.log(user);
-  debugger;
+  if (!user) return;
+
   dispatch(getNotes(user.id));
   return user;
 };

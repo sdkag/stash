@@ -7,10 +7,10 @@ export default function Home({ selectedUser }) {
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
   // const notes = useSelector((state) => state.notes.notes);
   return (
-    <>
+    <div className="main-content">
       <h1>Home</h1>
       {/* {user && <h4>Please login to get to the Stash</h4>} */}
       <NotesContainer selectedTab={selectedTab} />
-    </>
+    </div>
   );
 }

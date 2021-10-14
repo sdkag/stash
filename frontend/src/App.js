@@ -7,7 +7,7 @@ import MainContent from "./components/MainContent";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SideBar from "./components/SideBar";
-
+import Home from "./Pages/Home";
 import styles from "./index.css";
 function App() {
   const dispatch = useDispatch();
@@ -24,14 +24,10 @@ function App() {
   return (
     <div className="stashit">
       {/* <Navigation toggleSidebar={setIsSidebarOpen} isLoaded={isLoaded} /> */}
-
       <Navigation toggleSidebar={setIsSidebarOpen} sessionUser={sessionUser} />
-
       <section className="sidebar-maincontent">
-        <div className={`sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
-          <SideBar isSidebarOpen={isSidebarOpen} />
-        </div>
-        <div className="main-content">{sessionUser && <MainContent />}</div>
+        <SideBar isSidebarOpen={isSidebarOpen} />
+        <Home sessionUser={sessionUser} />
       </section>
     </div>
   );
@@ -40,12 +36,12 @@ function App() {
 export default function AppWrapper() {
   const dispatch = useDispatch();
   return (
-    <div className={styles.stashit}>
+    <>
       <App
         onClick={(e) => {
           dispatch(takeNoteActions.createNote());
         }}
       />
-    </div>
+    </>
   );
 }

@@ -8,7 +8,7 @@ import "./Searchbar.css";
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
-
+  const [isFocused, setFocused] = useState(false);
   // ;
 
   useEffect(() => {
@@ -22,12 +22,14 @@ export default function SearchBar() {
     console.log("lets handle close");
   };
   return (
-    <section className="searchbar-container">
+    <section className={`searchbar-container ${isFocused ? "focus" : ""}`}>
       {/* svg's from the site from og site keep.google..com */}
       <button className="searchbar search-icon" tabIndex="0">
         {searchSvg}
       </button>
       <input
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         styles={'{ color: "black" }'}
         className="searchbar search-input"
         value={searchTerm}

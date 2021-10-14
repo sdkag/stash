@@ -5,6 +5,7 @@ import notes from "./notes";
 import tabs from "./tabs";
 import takeNote from "./takeNote";
 import users from "./users";
+import modal from "./modal";
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   tabs,
   takeNote,
   users,
+  modal,
 });
 
 let enhancer;

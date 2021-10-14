@@ -15,6 +15,7 @@ import * as takeNoteActions from "./store/takeNote";
 import * as tabActions from "./store/tabs";
 import * as notesActions from "./store/notes";
 import * as usersActions from "./store/users";
+import * as modalActions from "./store/modal";
 
 const store = configureStore();
 
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV !== "production") {
   window.takeNoteActions = takeNoteActions;
   window.notesActions = notesActions;
   window.tabActions = tabActions;
+  window.modalActions = modalActions;
 }
 
 function Root() {

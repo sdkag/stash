@@ -1,3 +1,4 @@
+import { fetch } from "./csrf";
 import { ADD_NOTE as CLEAR_CONTENT } from "./notes";
 const SET_IS_OPEN = "takeNote/SET_IS_OPEN";
 const TOGGLE_PINNED = "takeNote/TOGGLE_PINNED";
@@ -33,12 +34,10 @@ export const setTitle = (title) => ({
   payload: title,
 });
 
-const addNote = (note) => {
-  return {
-    type: CLEAR_CONTENT,
-    payload: note,
-  };
-};
+const addNote = (note) => ({
+  type: CLEAR_CONTENT,
+  payload: note,
+});
 
 const processNoteState = ({ _isOpen, isArchived, isPinned, ...body }) => {
   return {
@@ -46,25 +45,28 @@ const processNoteState = ({ _isOpen, isArchived, isPinned, ...body }) => {
     status: isPinned || isArchived || "notes",
   };
 };
-export const createNote = () => async (dispatch, getStore) => {
-  const note = getStore().takeNote;
-  const processedNote = processNoteState(note);
-  dispatch(addNote(processedNote));
+export const createNote = (payload) => async (dispatch, getStore) => {
+  //TODO implement  ¿caching/ offline capabilities
+  // const note = getStore().takeNote;
+  // const processedNote = processNoteState(note);
+  // dispatch(addNote(processedNote));
 
-  // const response = await fetch("/api/notes", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(body),
-  // });
-  // const data = await response.json();
+  const response = await fetch("/api/notes", {
+    method: "POST",
+    payload,
+  });
+  const data = await response.json();
+
+  debugger;
+  dispatch(addNote(data));
 };
 
 const initialState = {
+  //TODO merge isOpen isPinnec and isArchived into  status field.
   isOpen: false,
   isPinned: false,
   isArchived: false,
+
   color: "white",
   content: "",
   title: "",
@@ -82,12 +84,12 @@ export default function reducer(state = initialState, action) {
     case TOGGLE_PINNED:
       return {
         ...state,
-        isPinned: action.paylaod,
+        isPinned: !state.isPinned,
       };
     case TOGGLE_ARCHIVED:
       return {
         ...state,
-        isArchived: action.paylaod,
+        isArchived: !state.isArchived,
       };
     case SET_COLOR:
       return {

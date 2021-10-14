@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Navigation.css";
 import SearchBar from "./SearchBar";
 import ProfileButton from "./ProfileButton";
-import { signup, login } from "../../store/session";
+// import { signup, login } from "../../store/session";
 import { searchSvg, hamburgerSvg } from "../../svgs";
 function Navigation({ fasterSessionUser: which, isLoaded, toggleSidebar }) {
   //? ifasterSessinUser faster than sessionUser
@@ -35,7 +35,7 @@ function Navigation({ fasterSessionUser: which, isLoaded, toggleSidebar }) {
       <div className="navbar placeholder"></div>
       <div className="navbar profile_button nav4">
         {/* {isLoaded && <ProfileButton user={sessionUser} />} */}
-        <ProfileButton isDropDown={isDropDown} sessionUser={sessionUser} />
+        <ProfileButton sessionUser={sessionUser} />
       </div>
     </section>
   );

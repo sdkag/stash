@@ -8,14 +8,14 @@ export default function UpperShelf() {
   const isPinned = useSelector((state) => state.takeNote.isPinned);
 
   const togglePinned = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    dispatch(takeNoteActions.togglePinned());
+    // e.stopPropagation();
+    // e.preventDefault();
+    dispatch(takeNoteActions.togglePinned(null));
   };
 
   const handleInput = ({ target: { value } }) => {
     // setContent(value);
-    dispatch(takeNoteActions.setTitle(value)); //? is this bnetter in a blur? its not really blocking
+    dispatch(takeNoteActions.setTitle(value)); //? is this bnetter in a blur? its not really blocking (i'm thinking a useState would trigger a rerender every onChange, while this... literally does that same thing :())
   };
   return (
     <div className="top-shelf">
@@ -28,12 +28,14 @@ export default function UpperShelf() {
           onChange={handleInput}
         />
       </div>
-      <div
+      <button
+        type="button"
         onClick={togglePinned}
         className={"pin " + isPinned ? "active-icon" : ""}
       >
+        {isPinned ? "pinned" : "unpinned"}
         {pinnedSvg}
-      </div>
+      </button>
     </div>
   );
 }
