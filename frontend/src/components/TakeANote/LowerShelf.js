@@ -18,14 +18,16 @@ export default function LowerShelf() {
     setPaletteOpen(true);
   };
   return (
-    <div className="lower-self">
+    <div className="lower-shelf">
       <div className="active-buttons">
         <div className="icons">
           {/*onHoever, opens a 3/4 modal, use click and sumbit color*/}
-          <div className="palette">
-            {paletteSvg}
-            onClick={openPalette}
-            <div className="paletteDropdown">
+          <div className="palette-container">
+            <button onClick={openPalette} className="palette-button">
+              {paletteSvg}
+            </button>
+
+            <div className="palette-dropdown ">
               {paletteOpen && <PaletteDropdown />}
             </div>
           </div>
@@ -41,7 +43,7 @@ export default function LowerShelf() {
           className="close"
           onClick={(e) => {
             e.preventDefault();
-            debugger;
+            // dispatch(closeModal);
             dispatch(takeNoteActions.createNote()); //closeForm. grab All of State. post to backed.
           }}
         >

@@ -35,7 +35,7 @@ function Navigation({ fasterSessionUser: which, isLoaded, toggleSidebar }) {
       <div className="navbar placeholder"></div>
       <div className="navbar profile_button nav4">
         {/* {isLoaded && <ProfileButton user={sessionUser} />} */}
-        <ProfileButton isDropDown={isDropDown} sessionUser={sessionUser} />
+        <ProfileButton sessionUser={sessionUser} />
       </div>
     </section>
   );

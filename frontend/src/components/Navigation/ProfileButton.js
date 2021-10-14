@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { getUsers } from "../../store/users";
 import DropDown from "../DropDown";
-function ProfileButton({ isDropDown, user }) {
+function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 

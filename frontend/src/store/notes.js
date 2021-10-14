@@ -1,5 +1,5 @@
 import { fetch } from "./csrf.js";
-import { isLoading } from "./ui";
+// import { isLoading } from "./ui";
 const FETCH_NOTES = "FETCH_NOTES";
 const SEARCH_NOTES = "SEARCH_NOTES";
 export const ADD_NOTE = "ADD_NOTE";
@@ -47,7 +47,6 @@ export const getNotes = (authorId) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
-  debugger;
   // dispatch(isLoading(false));
 };
 
@@ -106,7 +105,6 @@ function reducer(state = initialState, action) {
       let notes = [];
       let archive = [];
       let byStatus = { pinned, notes, archive };
-      debugger;
       return {
         ...state,
         byId: action.payload.reduce((state, note) => {
