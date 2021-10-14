@@ -29,4 +29,23 @@ router.get(
   })
 );
 
+router.post(
+  "/",
+  asyncHandler(async (req, res, next) => {
+    const { title, content, status } = req.body;
+
+    try {
+      const note = await Note.create({ title, content, status });
+      return res.json({ [note.id]: note.toSafeObject() });
+      ``;
+    } catch (e) {
+      const err = new Error("Post failed");
+      err.status = 503;
+      err.title = "Post failed";
+      err.errors = ["its missing its worse"];
+      return next(err);
+    }
+  })
+);
+
 module.exports = router;

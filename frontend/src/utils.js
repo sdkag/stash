@@ -11,7 +11,13 @@ export function mapIdsToComponents(entityIds, Component, sectionName) {
     </div>
   ) : null;
 }
-
+export const packageData = (form) => {
+  const formData = new FormData();
+  for (let field in form) {
+    formData.append(field, form[field]);
+  }
+  return formData;
+};
 export const debounce = (thunk, timeOut, dispatch) => {
   //TODO: incorporate this properly
   let timer;

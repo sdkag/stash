@@ -4,6 +4,7 @@ import { pinnedSvg } from "../../svgs";
 import * as takeNoteActions from "../../store/takeNote";
 export default function UpperShelf() {
   const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.takeNote.isOpen);
   const title = useSelector((state) => state.takeNote.title) || "";
   const isPinned = useSelector((state) => state.takeNote.isPinned);
 
@@ -17,7 +18,7 @@ export default function UpperShelf() {
     // setContent(value);
     dispatch(takeNoteActions.setTitle(value)); //? is this bnetter in a blur? its not really blocking (i'm thinking a useState would trigger a rerender every onChange, while this... literally does that same thing :())
   };
-  return (
+  return isOpen ? (
     <div className="top-shelf">
       <div className="title">
         <input
@@ -37,5 +38,5 @@ export default function UpperShelf() {
         {pinnedSvg}
       </button>
     </div>
-  );
+  ) : null;
 }

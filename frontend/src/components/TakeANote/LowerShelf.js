@@ -4,6 +4,8 @@ import * as takeNoteActions from "../../store/takeNote";
 import { paletteSvg, archivedSvg } from "../../svgs";
 import PaletteDropdown from "./PaletteDropdown";
 export default function LowerShelf() {
+  const isOpen = useSelector((state) => state.takeNote.isOpen);
+
   const dispatch = useDispatch();
   const toggleArchived = (e) => {
     e.stopPropagation();
@@ -17,7 +19,7 @@ export default function LowerShelf() {
     e.preventDefault();
     setPaletteOpen(true);
   };
-  return (
+  return isOpen ? (
     <div className="lower-shelf">
       <div className="active-buttons">
         <div className="icons">
@@ -51,5 +53,5 @@ export default function LowerShelf() {
         </button>
       </div>
     </div>
-  );
+  ) : null;
 }
