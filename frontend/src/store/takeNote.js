@@ -1,17 +1,21 @@
 import { fetch } from "./csrf";
 import { ADD_NOTE as CLEAR_CONTENT } from "./notes";
+import { packageData } from "../utils";
 const SET_IS_OPEN = "takeNote/SET_IS_OPEN";
 const TOGGLE_PINNED = "takeNote/TOGGLE_PINNED";
 const TOGGLE_ARCHIVED = "takeNote/TOGGLE_ARCHIVED";
 const SET_COLOR = "takeNote/SET_COLOR";
 const SET_TITLE = "takeNote/SET_TITLE";
 const SET_CONTENT = "takeNote/SET_CONTENT";
-
+const UPDATE_STATUS = "takeNote/UPDATE_STATUS";
 export const setIsOpen = (isOpen) => ({
   type: SET_IS_OPEN,
   payload: isOpen,
 });
-
+export const updateStatus = (status) => ({
+  type: UPDATE_STATUS,
+  payload: status,
+});
 export const togglePinned = () => ({
   type: TOGGLE_PINNED,
 });
@@ -45,12 +49,12 @@ const processNoteState = ({ _isOpen, isArchived, isPinned, ...body }) => {
     status: isPinned || isArchived || "notes",
   };
 };
-export const createNote = (payload) => async (dispatch, getStore) => {
+export const createNote = () => async (dispatch, getStore) => {
   //TODO implement  ¿caching/ offline capabilities
-  // const note = getStore().takeNote;
-  // const processedNote = processNoteState(note);
-  // dispatch(addNote(processedNote));
-
+  const note = getStore().takeNote;
+  const processedNote = processNoteState(note);
+  const payload = packageData(note);
+  dispatch(addNote(processedNote)); // the idea is caching?
   const response = await fetch("/api/notes", {
     method: "POST",
     payload,
@@ -64,9 +68,7 @@ export const createNote = (payload) => async (dispatch, getStore) => {
 const initialState = {
   //TODO merge isOpen isPinnec and isArchived into  status field.
   isOpen: false,
-  isPinned: false,
-  isArchived: false,
-
+  status: "notes",
   color: "white",
   content: "",
   title: "",
@@ -80,6 +82,9 @@ export default function reducer(state = initialState, action) {
       };
 
     // onst TOGGLE_STATE: state[action.payload] = !state[action.payload];
+    case UPDATE_STATUS:
+      return { ...state, status: action.payload };
+
     // return { ...state };
     case TOGGLE_PINNED:
       return {

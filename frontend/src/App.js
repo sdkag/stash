@@ -39,6 +39,7 @@ export default function AppWrapper() {
     <>
       <App
         onClick={(e) => {
+          debugger;
           dispatch(takeNoteActions.createNote());
         }}
       />
